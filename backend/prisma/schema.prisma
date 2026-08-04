@@ -32,6 +32,8 @@ model User {
 
   studentProfile StudentProfile?
 
+  librarianProfile LibrarianProfile?
+
   isActive Boolean @default(true)
 
   createdAt DateTime @default(now())
@@ -57,4 +59,20 @@ model StudentProfile {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("student_profiles")
+}
+
+model LibrarianProfile {
+  id Int @id @default(autoincrement())
+
+  userId String @unique
+
+  employeeId String @unique
+
+  designation String
+
+  joinedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("librarian_profiles")
 }
