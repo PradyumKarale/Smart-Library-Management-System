@@ -1,0 +1,42 @@
+### ==========================================================
+### Smart Library Management System
+### Authentication APIs
+### ==========================================================
+
+@baseUrl = http://localhost:5000/api/auth
+
+### Health Check
+GET http://localhost:5000/health
+
+###
+
+### Register Student
+POST {{baseUrl}}/register/student
+Content-Type: application/json
+
+{
+  "fullName": "Pradyum Karale",
+  "email": "pradyum@example.com",
+  "password": "Library@123",
+  "enrollmentNo": "CSE23001",
+  "department": "CSE",
+  "semester": 5,
+  "year": 3
+}
+
+###
+
+### Login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "pradyum@example.com",
+  "password": "Library@123"
+}
+
+###
+
+### Current User
+GET {{baseUrl}}/me
+Authorization: Bearer YOUR_JWT_TOKEN
