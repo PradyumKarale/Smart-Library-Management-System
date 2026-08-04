@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          Int     @id @default(autoincrement())
+  roleName    String  @unique
+  description String?
+
+  users User[]
+
+  @@map("roles")
+}
+
+model User {
+  id String @id @default(uuid())
+
+  fullName String
+
+  email String @unique
+
+  passwordHash String
+
+  roleId Int
+
+  role Role @relation(fields: [roleId], references: [id])
+
+  studentProfile StudentProfile?
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model StudentProfile {
+  id Int @id @default(autoincrement())
+
+  userId String @unique
+
+  enrollmentNo String @unique
+
+  department String
+
+  semester Int
+
+  year Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("student_profiles")
+}
