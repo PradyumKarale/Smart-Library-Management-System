@@ -62,21 +62,23 @@ model StudentProfile {
 }
 
 model LibrarianProfile {
-  id Int @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
 
-  userId String @unique
+  userId       String   @unique
 
-  employeeId String @unique
+  employeeId   String   @unique
 
-  designation String
+  designation  String
 
-  phone String?
+  phone        String?
 
-  address String?
+  address      String?
 
-  joinedAt DateTime @default(now())
+  joinedAt     DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("librarian_profiles")
-}
+
+  
+} 
