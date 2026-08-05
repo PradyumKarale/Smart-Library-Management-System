@@ -58,10 +58,9 @@ export const registerStudentSchema = z.object({
 export const loginSchema = z.object({
   email: z
     .string()
-    .email("Invalid email address")
-    .toLowerCase(),
+    .email("Please enter a valid email"),
 
   password: z
     .string()
-    .min(1, "Password is required"),
+    .min(6, "Password must be at least 6 characters"),
 });

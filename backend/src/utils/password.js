@@ -10,8 +10,14 @@ export const hashPassword = async (password) => {
 };
 
 /**
- * Compare plain-text password with hashed password
+ * Compare plain password with hashed password
  */
-export const comparePassword = async (password, hashedPassword) => {
-  return await bcrypt.compare(password, hashedPassword);
+export const comparePassword = async (
+  plainPassword,
+  hashedPassword
+) => {
+  return bcrypt.compare(
+    plainPassword,
+    hashedPassword
+  );
 };

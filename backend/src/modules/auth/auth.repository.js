@@ -57,3 +57,20 @@ export const createUser = async ({
     },
   });
 };
+
+/**
+ * Find active user by email
+ */
+export const findActiveUserByEmail = async (email) => {
+  return prisma.user.findFirst({
+    where: {
+      email,
+      isActive: true,
+    },
+    include: {
+      role: true,
+      studentProfile: true,
+      librarianProfile: true,
+    },
+  });
+};

@@ -67,3 +67,12 @@ prisma/dev.db-journal
 # ==========================================
 *.pid
 *.seed
+
+.postman/
+
+uploads/*
+!uploads/.gitkeep
+
+# Prisma AI / Skills
+skills-lock.json
+**/skills-lock.json
