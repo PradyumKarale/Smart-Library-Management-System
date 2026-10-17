@@ -62,23 +62,54 @@ model StudentProfile {
 }
 
 model LibrarianProfile {
-  id           Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  userId       String   @unique
+  userId String @unique
 
-  employeeId   String   @unique
+  employeeId String @unique
 
-  designation  String
+  designation String
 
-  phone        String?
+  phone String?
 
-  address      String?
+  address String?
 
-  joinedAt     DateTime @default(now())
+  joinedAt DateTime @default(now())
 
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("librarian_profiles")
+}
 
-  
-} 
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  books       Book[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("categories")
+}
+
+model Book {
+  id              String   @id @default(uuid())
+  isbn            String   @unique
+  title           String
+  author          String
+  publisher       String?
+  publicationYear Int?
+  shelfLocation   String?
+  totalCopies     Int      @default(1)
+  availableCopies Int      @default(1)
+  isActive        Boolean  @default(true)
+  categoryId      Int
+  category        Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([title])
+  @@index([author])
+  @@index([categoryId])
+  @@map("books")
+}
