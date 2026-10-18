@@ -337,6 +337,9 @@ git push
 # 👥 Contributors
 
 - Pradyum Karale
+- Aditya Nadimpalli
+- Vishruth Shetty
+- Jay Patel
 
 ---
 
