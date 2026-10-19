@@ -1,0 +1,25 @@
+$kind: http-request
+name: http://localhost:5000/api/auth/register/student
+description: ""
+url: http://localhost:5000/api/auth/register/student
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"fullName\": \"Aditya Test\",\r
+
+    \  \"email\": \"aditya.test@example.com\",\r
+
+    \  \"password\": \"Library@123\",\r
+
+    \  \"enrollmentNo\": \"CSE26001\",\r
+
+    \  \"department\": \"CSE\",\r
+
+    \  \"semester\": 5,\r
+
+    \  \"year\": 3\r
+
+    }"
+order: 1000

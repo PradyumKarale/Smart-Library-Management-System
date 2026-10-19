@@ -5,6 +5,7 @@ import { errorHandler } from "./middleware/error.middleware.js";
 import categoryRoutes from "./modules/categories/category.routes.js";
 import bookRoutes from "./modules/books/book.routes.js";
 import librarianRoutes from "./modules/librarians/librarian.routes.js";
+import studentRoutes from "./modules/students/student.routes.js";
 
 
 const app = express();
@@ -19,6 +20,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/librarians", librarianRoutes);
+app.use("/api/students", studentRoutes);
 
 // ================================
 // Health Check Route
