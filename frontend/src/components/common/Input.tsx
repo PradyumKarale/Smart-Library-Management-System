@@ -6,6 +6,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   hint?: string;
   leftIcon?: React.ReactNode;
   rightElement?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -14,10 +15,12 @@ export const Input: React.FC<InputProps> = ({
   hint,
   leftIcon,
   rightElement,
+  rightIcon,
   id,
   className = '',
   ...rest
 }) => {
+  const rightContent = rightElement || rightIcon;
   const inputId = id ?? `input-${label?.replace(/\s+/g, '-').toLowerCase()}`;
   return (
     <div className="flex flex-col gap-1.5">
@@ -39,13 +42,13 @@ export const Input: React.FC<InputProps> = ({
               ? 'border-rose-500/60 focus:ring-rose-500/30 focus:border-rose-500'
               : 'border-slate-700/60 focus:ring-brand-500/30 focus:border-brand-500/60'}
             ${leftIcon ? 'pl-9' : ''}
-            ${rightElement ? 'pr-10' : ''}
+            ${rightContent ? 'pr-10' : ''}
             ${className}
           `}
           {...rest}
         />
-        {rightElement && (
-          <span className="absolute right-3 text-slate-400">{rightElement}</span>
+        {rightContent && (
+          <span className="absolute right-3 text-slate-400">{rightContent}</span>
         )}
       </div>
       {error && <p className="text-xs text-rose-400">{error}</p>}

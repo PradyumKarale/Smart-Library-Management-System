@@ -116,8 +116,8 @@ export const AdminDashboard: React.FC = () => {
               <span className="text-white text-xs">{user?.email}</span>
             </div>
             <div className="flex items-center justify-between py-2">
-              <span className="text-slate-400">Backend</span>
-              <span className="text-emerald-400 text-xs font-medium">http://localhost:5000</span>
+              <span className="text-slate-400">Backend API</span>
+              <span className="text-emerald-400 text-xs font-medium">Active (Connected)</span>
             </div>
           </div>
         </Card>

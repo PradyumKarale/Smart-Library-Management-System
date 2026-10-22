@@ -16,7 +16,7 @@ import { useToast } from '../components/common/Toast';
 import { ApiError } from '../services/apiClient';
 import { Link } from 'react-router-dom';
 import {
-  BookOpen, Plus, Search, Pencil, Power, Filter, ChevronRight,
+  BookOpen, Plus, Search, Pencil, Power, Filter, ChevronRight, Sparkles,
 } from 'lucide-react';
 
 const EMPTY_FORM: CreateBookRequest = {
@@ -155,6 +155,11 @@ export const BooksPage: React.FC = () => {
         <Button variant="ghost" size="sm" leftIcon={<Filter className="w-4 h-4" />} onClick={load}>
           Refresh
         </Button>
+        <Link to="/assistant">
+          <Button variant="outline" size="sm" leftIcon={<Sparkles className="w-4 h-4 text-brand-400" />}>
+            AI Assistant
+          </Button>
+        </Link>
       </div>
 
       {/* Grid */}

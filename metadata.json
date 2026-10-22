@@ -1,0 +1,8 @@
+{
+  "name": "Smart Library Management System",
+  "description": "Intelligent, secure, and modern library management system for students, librarians, and administrators.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -7,6 +7,7 @@ import bookRoutes from "./modules/books/book.routes.js";
 import librarianRoutes from "./modules/librarians/librarian.routes.js";
 import studentRoutes from "./modules/students/student.routes.js";
 import issueRoutes from "./modules/issues/issue.routes.js";
+import aiRoutes from "./modules/ai/ai.routes.js";
 
 
 const app = express();
@@ -23,6 +24,7 @@ app.use("/api/books", bookRoutes);
 app.use("/api/librarians", librarianRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/issues", issueRoutes);
+app.use("/api/ai", aiRoutes);
 
 // ================================
 // Health Check Route
