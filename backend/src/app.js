@@ -6,6 +6,7 @@ import categoryRoutes from "./modules/categories/category.routes.js";
 import bookRoutes from "./modules/books/book.routes.js";
 import librarianRoutes from "./modules/librarians/librarian.routes.js";
 import studentRoutes from "./modules/students/student.routes.js";
+import issueRoutes from "./modules/issues/issue.routes.js";
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/librarians", librarianRoutes);
 app.use("/api/students", studentRoutes);
+app.use("/api/issues", issueRoutes);
 
 // ================================
 // Health Check Route

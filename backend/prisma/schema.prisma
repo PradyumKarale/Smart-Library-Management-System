@@ -34,6 +34,9 @@ model User {
 
   librarianProfile LibrarianProfile?
 
+  studentLoans Loan[] @relation("LoanStudent")
+  issuedLoans  Loan[] @relation("LoanIssuer")
+
   isActive Boolean @default(true)
 
   createdAt DateTime @default(now())
@@ -107,9 +110,30 @@ model Book {
   category        Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  loans           Loan[]
 
   @@index([title])
   @@index([author])
   @@index([categoryId])
   @@map("books")
+}
+
+
+model Loan {
+  id            String   @id @default(uuid())
+  studentUserId String
+  bookId        String
+  issuedById    String
+  issuedAt      DateTime @default(now())
+  dueDate       DateTime
+  returnedAt    DateTime?
+  fineAmount    Int      @default(0)
+  student       User     @relation("LoanStudent", fields: [studentUserId], references: [id], onDelete: Restrict)
+  book          Book     @relation(fields: [bookId], references: [id], onDelete: Restrict)
+  issuedBy      User     @relation("LoanIssuer", fields: [issuedById], references: [id], onDelete: Restrict)
+
+  @@index([studentUserId, returnedAt])
+  @@index([bookId, returnedAt])
+  @@index([dueDate, returnedAt])
+  @@map("loans")
 }
