@@ -7,6 +7,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
   size?: Size;
   loading?: boolean;
+  isLoading?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
 }
@@ -35,6 +36,7 @@ export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   size = 'md',
   loading = false,
+  isLoading = false,
   leftIcon,
   rightIcon,
   disabled,
@@ -42,7 +44,8 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   ...rest
 }) => {
-  const isDisabled = disabled || loading;
+  const isSpinning = loading || isLoading;
+  const isDisabled = disabled || isSpinning;
   return (
     <button
       disabled={isDisabled}
@@ -54,11 +57,11 @@ export const Button: React.FC<ButtonProps> = ({
       `}
       {...rest}
     >
-      {loading ? (
+      {isSpinning ? (
         <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
       ) : leftIcon}
       {children}
-      {!loading && rightIcon}
+      {!isSpinning && rightIcon}
     </button>
   );
 };

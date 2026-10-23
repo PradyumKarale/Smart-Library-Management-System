@@ -84,6 +84,43 @@ export const LoginPage: React.FC = () => {
               Sign In
             </Button>
           </form>
+
+          {/* Demo Credentials Helper */}
+          <div className="pt-2 border-t border-slate-700/60">
+            <p className="text-xs font-medium text-slate-400 mb-2">Demo Credentials (click to fill):</p>
+            <div className="grid grid-cols-3 gap-1.5 text-xs">
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('admin@smartlibrary.com');
+                  setPassword('Admin@123');
+                }}
+                className="px-2 py-1.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 border border-indigo-500/20 text-center transition-colors font-medium"
+              >
+                Admin
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('librarian@smartlibrary.com');
+                  setPassword('Librarian@123');
+                }}
+                className="px-2 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/20 text-center transition-colors font-medium"
+              >
+                Librarian
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('rahul@example.com');
+                  setPassword('Password@123');
+                }}
+                className="px-2 py-1.5 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 border border-sky-500/20 text-center transition-colors font-medium"
+              >
+                Student
+              </button>
+            </div>
+          </div>
         </div>
 
         <p className="text-center text-xs text-slate-500">

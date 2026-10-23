@@ -13,6 +13,7 @@ import { CategoriesPage } from './pages/CategoriesPage';
 import { IssuesPage } from './pages/IssuesPage';
 import { StudentsPage } from './pages/StudentsPage';
 import { LibrariansPage } from './pages/LibrariansPage';
+import { AiAssistantPage } from './pages/AiAssistantPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ForbiddenPage } from './pages/ForbiddenPage';
 
@@ -37,6 +38,7 @@ const App: React.FC = () => (
                 <Route index element={<CategoriesPage />} />
               </Route>
               <Route path="/issues" element={<IssuesPage />} />
+              <Route path="/assistant" element={<AiAssistantPage />} />
               <Route path="/students" element={
                 <ProtectedRoute allowedRoles={['ADMIN', 'LIBRARIAN']} />
               }>

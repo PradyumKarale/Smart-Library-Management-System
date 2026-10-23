@@ -8,6 +8,7 @@ const titleMap: Record<string, string> = {
   '/issues': 'Issues & Returns',
   '/students': 'Students',
   '/librarians': 'Librarians',
+  '/assistant': 'AI Library Assistant',
 };
 
 export const Navbar: React.FC = () => {

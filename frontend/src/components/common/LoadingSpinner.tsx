@@ -3,7 +3,9 @@ import React from 'react';
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
   text?: string;
+  label?: string;
   fullScreen?: boolean;
+  fullHeight?: boolean;
 }
 
 const sizeMap = { sm: 'w-5 h-5', md: 'w-8 h-8', lg: 'w-12 h-12' };
@@ -11,14 +13,17 @@ const sizeMap = { sm: 'w-5 h-5', md: 'w-8 h-8', lg: 'w-12 h-12' };
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   size = 'md',
   text,
+  label,
   fullScreen = false,
+  fullHeight = false,
 }) => {
+  const displayText = label || text;
   const content = (
     <div className="flex flex-col items-center gap-3">
       <span
         className={`${sizeMap[size]} border-2 border-brand-500/30 border-t-brand-400 rounded-full animate-spin`}
       />
-      {text && <p className="text-sm text-slate-400">{text}</p>}
+      {displayText && <p className="text-sm text-slate-400">{displayText}</p>}
     </div>
   );
 
@@ -31,7 +36,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   }
 
   return (
-    <div className="flex items-center justify-center py-12">
+    <div className={`flex items-center justify-center ${fullHeight ? 'min-h-[50vh] py-12' : 'py-12'}`}>
       {content}
     </div>
   );

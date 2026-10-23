@@ -1,346 +1,177 @@
-# 📚 Smart Library Management System
+# 📚 Smart Library Management System (SLMS)
 
-A modern Library Management System built using **Node.js, Express.js, Prisma ORM, MySQL, and JWT Authentication**.
+A production-grade, full-stack Library Management System built with **React (TypeScript, Vite, Tailwind CSS)**, **Node.js/Express**, **Prisma ORM**, **MySQL**, **JWT Authentication**, and an integrated **Groq-powered AI Library Assistant**.
 
 ---
 
-# 🚀 Tech Stack
+## 🚀 Tech Stack
+
+### Frontend
+- **Framework:** React 18 with TypeScript & Vite
+- **Styling:** Tailwind CSS with Lucide Icons
+- **Routing:** React Router v6 with Role-Based Protected Routes
+- **State/Notifications:** Custom Context Providers (Auth, Toast, Modals)
 
 ### Backend
-
-- Node.js
-- Express.js
-- Prisma ORM
-- MySQL
-- JWT
-- bcrypt
-- Zod
-
-### Tools
-
-- Git
-- Postman
-- VS Code
+- **Runtime:** Node.js (v22+ LTS)
+- **Server:** Express.js 5
+- **ORM / Database:** Prisma ORM with MySQL (and seamless offline in-memory fallback store)
+- **Authentication:** JSON Web Tokens (JWT) & `bcryptjs` password hashing
+- **Validation:** Zod schemas
+- **AI Engine:** Official Groq Cloud SDK (`groq-sdk`)
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
 ```
 Smart-Library-Management-System
-│
-├── backend
-│
-├── frontend (Coming Soon)
-│
-├── tests
-│
-├── docs
-│
-└── README.md
+├── backend/
+│   ├── prisma/             # Prisma schema and database migrations
+│   └── src/
+│       ├── config/         # Environment configuration (JWT, ports, AI)
+│       ├── constants/      # Reusable roles and messages
+│       ├── middleware/     # Auth, role authorization, and error handlers
+│       ├── modules/        # Modular domains:
+│       │   ├── ai/         # Groq AI Assistant controller, service, routes & schema
+│       │   ├── auth/       # Registration, login, profile, mapper & repo
+│       │   ├── books/      # Book catalogue CRUD and inventory tracking
+│       │   ├── categories/ # Category management
+│       │   ├── issues/     # Issue, loan limits, return, and fine calculator
+│       │   ├── librarians/ # Staff management
+│       │   └── students/   # Student profile management
+│       ├── prisma/         # Prisma client / mock store fallback
+│       ├── utils/          # JWT, password hashing, API envelope response
+│       ├── app.js          # Express app registration
+│       └── server.js       # Standalone backend server (port 5000)
+├── frontend/
+│   ├── src/
+│   │   ├── components/     # Reusable UI & AI Assistant Chat floating widget
+│   │   ├── context/        # Auth Context & Session listeners
+│   │   ├── pages/          # Dashboards (Admin, Librarian, Student), Books, Issues
+│   │   ├── services/       # Typed apiClient services for each domain
+│   │   └── types/          # Domain TypeScript interfaces
+│   ├── index.html
+│   └── vite.config.ts
+├── server.js               # Unified dev & production server on port 3000
+├── package.json            # Root workspace config (backend & frontend)
+└── .env.example            # Environment variable reference
 ```
 
 ---
 
-# 📦 Prerequisites
+## ⚙️ Environment Variables
 
-Install the following before running the project.
-
-- Node.js (v22+ recommended)
-- MySQL
-- Git
-- VS Code
-- Postman (for API testing)
-
-Check installation:
-
-```bash
-node -v
-npm -v
-git --version
-```
-
----
-
-# 📥 Clone Repository
-
-```bash
-git clone https://github.com/PradyumKarale/Smart-Library-Management-System.git
-```
-
-```bash
-cd Smart-Library-Management-System
-```
-
----
-
-# 📦 Install Dependencies
-
-## Root
-
-```bash
-npm install
-```
-
-## Backend
-
-```bash
-cd backend
-npm install
-```
-
----
-
-# 📚 Backend Packages
-
-These packages are required for the backend.
-
-### Production Dependencies
-
-```bash
-npm install express
-npm install prisma
-npm install @prisma/client
-npm install jsonwebtoken
-npm install bcrypt
-npm install dotenv
-npm install zod
-npm install cors
-npm install morgan
-```
-
-### Development Dependencies
-
-```bash
-npm install -D nodemon
-```
-
----
-
-# ⚙ Environment Variables
-
-Create:
-
-```
-backend/.env
-```
-
-Paste:
+Create `.env` at root or in `backend/.env`:
 
 ```env
+# Server Configuration
+PORT=3000
 NODE_ENV=development
 
-PORT=5000
+# JWT Authentication
+JWT_SECRET=your_long_random_jwt_secret_key_here
+JWT_EXPIRES_IN=7d
 
-JWT_SECRET=replace_this_with_a_long_random_secret_key
-
-JWT_EXPIRES_IN=1d
-
+# Database (MySQL via Prisma)
 DATABASE_URL="mysql://root:YOUR_PASSWORD@localhost:3306/library_management_db"
 
+# Optional Email Notification placeholders
 EMAIL_USER=
-
 EMAIL_PASS=
-```
 
-Replace:
-
-```
-YOUR_PASSWORD
-```
-
-with your local MySQL password.
-
----
-
-# 🗄 Database Setup
-
-Create the database.
-
-```sql
-CREATE DATABASE library_management_db;
-```
-
-Generate Prisma Client.
-
-```bash
-npx prisma generate
-```
-
-Create tables.
-
-```bash
-npx prisma migrate dev
-```
-
-If using an existing schema:
-
-```bash
-npx prisma db push
-```
-
-Open Prisma Studio.
-
-```bash
-npx prisma studio
+# AI Library Assistant (Groq Cloud Developer Tier)
+AI_PROVIDER=groq
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL=llama-3.3-70b-versatile
 ```
 
 ---
 
-# ▶ Running the Backend
+## 🤖 Groq AI Library Assistant Setup
 
-Go to backend.
+The SLMS AI Assistant is powered by the GroqCloud API using ultra-fast LPU inference:
 
-```bash
-cd backend
-```
-
-Start the server.
-
-```bash
-npm run dev
-```
-
-Expected:
-
-```
-Server running on port 5000
-```
+1. **Obtain Free API Key:** Sign up at [https://console.groq.com/keys](https://console.groq.com/keys).
+2. **Configure Key:** Add `GROQ_API_KEY=gsk_...` to your `.env`.
+3. **Supported Models:** Default is `llama-3.3-70b-versatile`. You can also configure `llama-3.1-8b-instant`.
+4. **Free-Tier Limits:** Groq's developer tier enforces rate limits (Requests Per Minute / Tokens Per Minute). If a rate limit (HTTP 429) occurs, the assistant cleanly notifies the user, explains that the limit was reached, and offers a retry without breaking any core library operations.
+5. **Safe Catalog Grounding:** The assistant strictly answers from the real library catalog (titles, authors, categories, shelf locations, and live availability), enforcing loan limits (14 days, max 3 books) and protecting student privacy.
 
 ---
 
-# 🧪 API Testing
+## 🏃 Running the Application
 
-Current APIs
-
-### Register Student
-
-```
-POST /api/auth/register/student
-```
-
-### Login
-
-```
-POST /api/auth/login
-```
-
-### Current User
-
-```
-GET /api/auth/me
-```
-
-Header
-
-```
-Authorization
-
-Bearer <JWT_TOKEN>
-```
-
----
-
-# 📁 .gitignore
-
-The following files should NOT be committed.
-
-```
-node_modules/
-.env
-.env.*
-dist/
-build/
-coverage/
-
-*.log
-
-.vscode/
-.idea/
-
-skills-lock.json
-**/skills-lock.json
-
-.postman/
-
-.DS_Store
-Thumbs.db
-```
-
----
-
-# ✅ Completed Features
-
-- Student Registration
-- Login
-- Password Hashing
-- JWT Authentication
-- Protected Routes
-- Current User API
-- Role-Based Access Control (RBAC)
-- Repository Pattern
-- Service Layer
-- Zod Validation
-- Centralized Error Handling
-
----
-
-# 🚧 Upcoming Features
-
-- Book Management
-- Student Management
-- Librarian Management
-- Issue & Return
-- Reservation System
-- Dashboard
-- Reports
-- AI Features
-
----
-
-# 👨‍💻 Development Workflow
-
-After pulling the latest code:
-
-```bash
-git pull
-```
-
-Install dependencies if needed.
-
+### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-Start backend.
-
+### 2. Development Mode (Unified Port 3000)
 ```bash
-cd backend
-
 npm run dev
 ```
+Starts the full-stack server on `http://localhost:3000`:
+- Express backend APIs: `/api/auth`, `/api/books`, `/api/categories`, `/api/issues`, `/api/students`, `/api/librarians`, `/api/ai`
+- Health check: `http://localhost:3000/health`
+- Vite React frontend served with hot module reloading.
 
-Test APIs using Postman.
-
-Commit changes.
-
+### 3. Production Build & Start
 ```bash
-git add .
-
-git commit -m "your message"
-
-git push
+npm run build
+npm start
 ```
 
 ---
 
-# 👥 Contributors
+## 🔑 Demo Login Accounts
 
-- Pradyum Karale
-- Aditya Nadimpalli
-- Vishruth Shetty
-- Jay Patel
+Pre-seeded accounts are provided for testing all user roles:
+
+| Role | Email | Password | Permissions |
+|---|---|---|---|
+| **Admin** | `admin@smartlibrary.com` | `Admin@123` | Full system access, librarians, categories, books, issues |
+| **Librarian** | `librarian@smartlibrary.com` | `Librarian@123` | Issue books, returns, inventory, students, categories |
+| **Student** | `rahul@example.com` | `Password@123` | Browse catalog, view personal loans/fines, AI assistant |
+
+*(Quick demo login buttons are also available on the Login page).*
 
 ---
 
-Happy Coding! 🚀
+## 🧪 Testing and Verification
+
+- **Frontend Typecheck & Build:**
+  ```bash
+  npm run build
+  ```
+- **Linter Check:**
+  ```bash
+  npm run lint
+  ```
+- **Backend Unit Tests:**
+  ```bash
+  npm test
+  ```
+- **AI Chat Endpoint Check (cURL):**
+  ```bash
+  # 1. Login to get token:
+  TOKEN=$(curl -s -X POST http://localhost:3000/api/auth/login \
+    -H "Content-Type: application/json" \
+    -d '{"email":"admin@smartlibrary.com","password":"Admin@123"}' \
+    | grep -o '"token":"[^"]*' | cut -d'"' -f4)
+
+  # 2. Query AI Chat endpoint:
+  curl -X POST http://localhost:3000/api/ai/chat \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $TOKEN" \
+    -d '{"message":"Recommend beginner programming books"}'
+  ```
+
+---
+
+## 👥 Contributors
+
+- **Pradyum Karale**
+- **Aditya Nadimpalli**
+- **Vishruth Shetty**
+- **Jay Patel**

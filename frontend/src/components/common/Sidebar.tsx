@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight,
   LogOut,
+  Sparkles,
 } from 'lucide-react';
 
 interface NavItem {
@@ -22,12 +23,13 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { to: '/',            label: 'Dashboard',  icon: <LayoutDashboard className="w-5 h-5" />, roles: ['ADMIN', 'LIBRARIAN', 'STUDENT'] },
-  { to: '/books',       label: 'Books',       icon: <BookOpen className="w-5 h-5" />,        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT'] },
-  { to: '/categories',  label: 'Categories',  icon: <Tag className="w-5 h-5" />,             roles: ['ADMIN', 'LIBRARIAN'] },
-  { to: '/issues',      label: 'Issues',      icon: <Repeat className="w-5 h-5" />,          roles: ['ADMIN', 'LIBRARIAN', 'STUDENT'] },
-  { to: '/students',    label: 'Students',    icon: <Users className="w-5 h-5" />,           roles: ['ADMIN', 'LIBRARIAN'] },
-  { to: '/librarians',  label: 'Librarians',  icon: <UserCog className="w-5 h-5" />,         roles: ['ADMIN'] },
+  { to: '/',            label: 'Dashboard',    icon: <LayoutDashboard className="w-5 h-5" />, roles: ['ADMIN', 'LIBRARIAN', 'STUDENT'] },
+  { to: '/books',       label: 'Books',         icon: <BookOpen className="w-5 h-5" />,        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT'] },
+  { to: '/assistant',   label: 'AI Assistant',  icon: <Sparkles className="w-5 h-5 text-brand-400" />, roles: ['ADMIN', 'LIBRARIAN', 'STUDENT'] },
+  { to: '/categories',  label: 'Categories',    icon: <Tag className="w-5 h-5" />,             roles: ['ADMIN', 'LIBRARIAN'] },
+  { to: '/issues',      label: 'Issues',        icon: <Repeat className="w-5 h-5" />,          roles: ['ADMIN', 'LIBRARIAN', 'STUDENT'] },
+  { to: '/students',    label: 'Students',      icon: <Users className="w-5 h-5" />,           roles: ['ADMIN', 'LIBRARIAN'] },
+  { to: '/librarians',  label: 'Librarians',    icon: <UserCog className="w-5 h-5" />,         roles: ['ADMIN'] },
 ];
 
 export const Sidebar: React.FC = () => {

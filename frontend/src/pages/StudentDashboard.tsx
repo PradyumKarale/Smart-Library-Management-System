@@ -5,7 +5,7 @@ import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { issueService } from '../services/issueService';
 import { Loan } from '../types/issue';
 import { Link } from 'react-router-dom';
-import { BookOpen, Repeat, ChevronRight, Clock, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Repeat, ChevronRight, Clock, CheckCircle2, Sparkles } from 'lucide-react';
 import { Badge } from '../components/common/Badge';
 
 export const StudentDashboard: React.FC = () => {
@@ -29,9 +29,9 @@ export const StudentDashboard: React.FC = () => {
         <p className="text-sm text-slate-400 mt-1">Student portal</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Link to="/books">
-          <Card hover>
+          <Card hover className="h-full">
             <div className="inline-flex p-2.5 rounded-xl bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-3">
               <BookOpen className="w-6 h-6" />
             </div>
@@ -40,12 +40,23 @@ export const StudentDashboard: React.FC = () => {
           </Card>
         </Link>
         <Link to="/issues">
-          <Card hover>
+          <Card hover className="h-full">
             <div className="inline-flex p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-3">
               <Repeat className="w-6 h-6" />
             </div>
             <p className="text-sm font-semibold text-white">My Loans</p>
             <p className="text-xs text-slate-400 mt-0.5">Track your issued books</p>
+          </Card>
+        </Link>
+        <Link to="/assistant">
+          <Card hover className="h-full border-brand-500/30 bg-gradient-to-br from-brand-950/40 to-slate-900">
+            <div className="inline-flex p-2.5 rounded-xl bg-gradient-to-br from-brand-500/20 to-indigo-500/20 text-brand-300 border border-brand-500/30 mb-3">
+              <Sparkles className="w-6 h-6 text-brand-400" />
+            </div>
+            <p className="text-sm font-semibold text-white flex items-center gap-1.5">
+              AI Assistant <span className="text-[10px] bg-brand-500/20 text-brand-300 px-1.5 py-0.5 rounded-full font-medium">Groq</span>
+            </p>
+            <p className="text-xs text-slate-400 mt-0.5">Course book recommendations</p>
           </Card>
         </Link>
       </div>

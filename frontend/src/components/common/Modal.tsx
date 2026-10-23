@@ -5,8 +5,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
+  subtitle?: string;
   children: React.ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl';
+  maxWidth?: string;
   footer?: React.ReactNode;
 }
 
@@ -21,8 +23,10 @@ export const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   title,
+  subtitle,
   children,
   size = 'md',
+  maxWidth,
   footer,
 }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -36,6 +40,8 @@ export const Modal: React.FC<ModalProps> = ({
 
   if (!isOpen) return null;
 
+  const widthClass = maxWidth || sizeMap[size];
+
   return (
     <div
       ref={overlayRef}
@@ -43,11 +49,14 @@ export const Modal: React.FC<ModalProps> = ({
       onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
     >
       <div
-        className={`w-full ${sizeMap[size]} bg-slate-800 border border-slate-700/60 rounded-2xl shadow-2xl flex flex-col max-h-[90vh]`}
+        className={`w-full ${widthClass} bg-slate-800 border border-slate-700/60 rounded-2xl shadow-2xl flex flex-col max-h-[90vh]`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700/60">
-          <h2 className="text-base font-semibold text-white">{title}</h2>
+          <div>
+            <h2 className="text-base font-semibold text-white">{title}</h2>
+            {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
+          </div>
           <button
             onClick={onClose}
             className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-colors"
